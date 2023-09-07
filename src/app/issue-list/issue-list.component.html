@@ -1,4 +1,4 @@
-<ng-container *ngIf="showReportIssue === false">
+<ng-container *ngIf="showReportIssue === false && !editIssue">
   <button class="btn btn-primary" (click)="showReportIssue = true">
     Add new issue
   </button>
@@ -23,6 +23,7 @@
       </clr-dg-cell>
       <clr-dg-cell>
         <button class="btn" (click)="selectedIssue = issue">Resolve</button>
+        <button class="btn" (click)="editIssue = issue">Detail</button>
       </clr-dg-cell>
     </clr-dg-row>
     <clr-dg-footer>{{ issues.length }} issues</clr-dg-footer>
@@ -31,6 +32,11 @@
 <app-issue-report
   *ngIf="showReportIssue === true"
   (formClose)="onCloseReport()"
+/>
+<app-issue-detail
+  *ngIf="editIssue"
+  (formClose)="onCloseReport()"
+  [issue]="editIssue"
 />
 <app-confirm-dialog
   *ngIf="selectedIssue"
