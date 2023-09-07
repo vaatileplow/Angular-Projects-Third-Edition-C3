@@ -29,4 +29,16 @@ export class IssuesService {
     const index = this.issues.findIndex((i) => i === issue);
     this.issues[index] = selectedIssue;
   }
+
+  getSuggestions(title: string): Issue[] {
+    if (title.length < 3) {
+      return [];
+    }
+    return this.issues.filter(
+      (issue) =>
+        issue.title.toLocaleLowerCase().indexOf(title.toLocaleLowerCase()) !==
+        -1
+    );
+  }
+
 }
