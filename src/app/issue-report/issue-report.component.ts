@@ -24,7 +24,6 @@ export class IssueReportComponent {
     }),
     description: new FormControl('', {
       nonNullable: true,
-      validators: Validators.required,
     }),
     priority: new FormControl('', {
       nonNullable: true,
