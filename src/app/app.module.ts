@@ -8,6 +8,7 @@ import { ClarityModule } from '@clr/angular';
 import { AppComponent } from './app.component';
 import { IssueListComponent } from './issue-list/issue-list.component';
 import { IssueReportComponent } from './issue-report/issue-report.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [AppComponent, IssueListComponent, IssueReportComponent, ConfirmDialogComponent],
