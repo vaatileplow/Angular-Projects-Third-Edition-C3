@@ -1,4 +1,12 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 import { Issue } from 'src/app/issue';
 import { IssuesService } from '../issues.service';
@@ -19,7 +27,7 @@ export class IssueReportComponent implements OnInit {
   issueForm = new FormGroup<IssueForm>({
     title: new FormControl('', {
       nonNullable: true,
-      validators: Validators.required,
+      validators: [Validators.required, this.titleExistsValidator()],
     }),
     description: new FormControl('', {
       nonNullable: true,
@@ -52,5 +60,23 @@ export class IssueReportComponent implements OnInit {
     }
     await this.issueService.createIssue(this.issueForm.getRawValue() as Issue);
     await this.formClose.emit();
+  }
+
+  titleExistsValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (!value) {
+        return null;
+      }
+
+      const issue: Issue | undefined =
+        this.issueService.getIssueFromTitle(value);
+
+      if (!issue) {
+        return null;
+      }
+
+      return { titleExists: true };
+    };
   }
 }

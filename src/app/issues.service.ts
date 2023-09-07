@@ -41,4 +41,7 @@ export class IssuesService {
     );
   }
 
+  getIssueFromTitle(title: string): Issue | undefined {
+    return this.issues.find((issue) => issue.title === title);
+  }
 }

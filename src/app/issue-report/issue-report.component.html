@@ -3,7 +3,12 @@
   <clr-input-container>
     <label>Title</label>
     <input clrInput formControlName="title" />
-    <clr-control-error>Title is required</clr-control-error>
+    <clr-control-error *clrIfError="'required'"
+      >Title is required</clr-control-error
+    >
+    <clr-control-error *clrIfError="'titleExists'"
+      >Title already exists</clr-control-error
+    >
   </clr-input-container>
   <div class="clr-row" *ngIf="suggestions.length">
     <div class="clr-col-lg-2"></div>
